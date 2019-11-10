@@ -9,8 +9,10 @@ def make_request(url, params):
         response.raise_for_status()
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
+        exit(1)
     except Exception as err:
         print(f'Other error occurred: {err}')
+        exit(1)
     else:
         if response.status_code != 200:
             print('Request not successful (status code %d), exiting.' % (response.status_code))
