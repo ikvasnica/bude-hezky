@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from sendgrid.helpers.mail import Mail
 from requests.exceptions import RequestException
 
+from bude_hezky.content import content_builder
 from bude_hezky.sender import email_sender
 from bude_hezky.weather import weather_forecast
 
@@ -34,12 +35,8 @@ if not sunny_hours:
     print(':( Zítra raději zůstaň doma.')
     sys.exit()
 
-sunny_ranges = []
-for start_hour in sunny_hours:
-    sunny_ranges.append(f'{start_hour}:00 - {start_hour+3}:00')
-
-hours_string = ', '.join(str(s) for s in sunny_ranges)
-final_message = f'Hurá! Zítra bude ve městě {city} hezky mezi {hours_string}. Běž třeba na kolo!'
+hours_string = ', '.join(str(s) for s in content_builder.build_sunny_ranges(sunny_hours))
+final_message = content_builder.rreplace(f'Hurá! Zítra bude ve městě {city} hezky mezi {hours_string}. Běž třeba na kolo!', ', ', ' a ', 1)
 print(final_message)
 
 if to_email:
