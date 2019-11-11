@@ -14,9 +14,16 @@ V terminálu prostě spustíš: `pipenv install`
 A je to.
 
 ## Použití
-Nemůže to být jednodušší! Opět otevři terminál a zkopíruj tam tohle (příklad pro Prahu). Kód země je důležitý, pokud existuje více měst se shodným názvem.
+Nemůže to být jednodušší! 
 
-`pipenv run python -m bude_hezky.main Prague,CZ`
+Teda... 
+
+1. Zaregistruj se na [OpenWeatherMap](https://openweathermap.org) a vygeneruj si API klíč.
+2. (optional, pouze pokud chceš posílat e-maily) Zaregistruj se na [Sendgrid](https://sendgrid.com) a vygeneruj si API klíč.
+3. Přejmenuj soubor `.env.example` na `.env` a vlož vygenerované klíče.
+4. Opět otevři terminál a zkopíruj tam tohle (příklad pro Prahu). Kód země je důležitý, pokud existuje více měst se shodným názvem.
+
+    `pipenv run python -m bude_hezky.main Prague,CZ`
 
 ### Seznam volitelných argumentů
 + *--email*: E-mailová adresa, na kterou se odešle informace o počasí
