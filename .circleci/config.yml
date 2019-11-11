@@ -9,7 +9,7 @@ jobs:
     steps:
       - checkout
       - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8.0/site-packages
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
       - restore_cache:  # ensure this step occurs *before* installing dependencies
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
@@ -21,7 +21,7 @@ jobs:
           paths:
             - ".venv"
             - "/usr/local/bin"
-            - "/usr/local/lib/python3.8.0/site-packages"
+            - "/usr/local/lib/python3.8/site-packages"
       - run:
           command: |
             pipenv run python -m bude_hezky.main $BUDEHEZKY_CITY_COUNTRY --email $BUDEHEZKY_EMAIL_RECIPIENT
