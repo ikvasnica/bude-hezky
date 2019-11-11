@@ -4,6 +4,7 @@ import sys
 
 from dotenv import load_dotenv
 from sendgrid.helpers.mail import Mail
+from requests.exceptions import RequestException
 
 from bude_hezky.sender import email_sender
 from bude_hezky.weather import weather_forecast
@@ -13,7 +14,7 @@ EMAIL_OPTION_KEY = 'email'
 SUNNY_LIKE_CODES = [1, 2, 3, 4, 5, 6, 20, 21, 30]
 
 parser = argparse.ArgumentParser()
-parser.add_argument(CITY_OPTION_KEY, help='Město, kde bydlíš. Můžeš zkusit i vesnici.')
+parser.add_argument(CITY_OPTION_KEY, help='Město, kde bydlíš a kód státu (např. Prague,CZ). Můžeš zkusit i vesnici.')
 parser.add_argument(f'--{EMAIL_OPTION_KEY}', help='E-mail, na který pošleme informaci, zda bude hezky.')
 cli_arguments = vars(parser.parse_args())
 
@@ -23,17 +24,24 @@ api_key = os.getenv('WEATHER_API_KEY')
 city = cli_arguments[CITY_OPTION_KEY]
 to_email = cli_arguments[EMAIL_OPTION_KEY]
 try:
-    tomorrow_forecast = weather_forecast.get_forecast_for_city(api_key, city)
-except weather_forecast.NoForecastRetrievedException as e:
+    tomorrow_forecasts = weather_forecast.get_forecasts_for_city(api_key, city)
+except RequestException as e:
     print(f'Počasí nezjištěno kvůli chybě: {e}')
     sys.exit(1)
 
-if tomorrow_forecast not in SUNNY_LIKE_CODES:
+sunny_hours = weather_forecast.get_sunny_like_hours(tomorrow_forecasts)
+if not sunny_hours:
     print(':( Zítra raději zůstaň doma.')
     sys.exit()
 
-final_message = f'Hurá! Zítra bude ve městě {city} hezky. Běž třeba na kolo!'
+sunny_ranges = []
+for start_hour in sunny_hours:
+    sunny_ranges.append(f'{start_hour}:00 - {start_hour+3}:00')
+
+hours_string = ', '.join(str(s) for s in sunny_ranges)
+final_message = f'Hurá! Zítra bude ve městě {city} hezky mezi {hours_string}. Běž třeba na kolo!'
 print(final_message)
+
 if to_email:
     print('Posílám e-mail...')
     message = Mail(
@@ -46,3 +54,4 @@ if to_email:
         email_sender.send_mail(message)
     except email_sender.EmailNotSentException as e:
         print(f'E-mail nemohl být poslán kvůli chybě: {e}')
+        sys.exit(1)
