@@ -26,4 +26,4 @@ Teda...
     `pipenv run python -m bude_hezky.main Prague,CZ`
 
 ### Seznam volitelných argumentů
-+ *--email*: E-mailová adresa, na kterou se odešle informace o počasí
++ `--email` - E-mailová adresa, na kterou se odešle informace o počasí
