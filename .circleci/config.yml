@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  send:
     working_directory: ~/bude-hezky-day-run
     docker:
       - image: circleci/python:3.8.0
@@ -25,3 +25,16 @@ jobs:
       - run:
           command: |
             pipenv run python -m bude_hezky.main $BUDEHEZKY_CITY_COUNTRY --email $BUDEHEZKY_EMAIL_RECIPIENT
+
+workflows:
+  version: 2
+  weatherinfo:
+    triggers:
+      - schedule:
+          cron: "31 18 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - send
