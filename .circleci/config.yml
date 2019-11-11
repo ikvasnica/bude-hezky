@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/bude-hezky-day-run
+    docker:
+      - image: circleci/python:3.8.0
+      environment:
+        PIPENV_VENV_IN_PROJECT: true
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8.0/site-packages
+      - restore_cache:  # ensure this step occurs *before* installing dependencies
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run:
+          command: |
+            sudo pip install pipenv
+            pipenv install
+      - save_cache:
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.8.0/site-packages"
+      - run:
+          command: |
+            pipenv run python -m bude_hezky.main $BUDEHEZKY_CITY_COUNTRY --email $BUDEHEZKY_EMAIL_RECIPIENT
