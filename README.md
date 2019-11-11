@@ -9,7 +9,7 @@ Speciálně věnováno pro [Honza Javorek](https://github.com/honzajavorek).
 + Python (alespoň verze 3.8.0)
 + pipenv
 
-V terminálu prostě spustíš: `pip install`
+V terminálu prostě spustíš: `pipenv install`
 
 A je to.
 
