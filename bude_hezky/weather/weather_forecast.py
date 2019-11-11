@@ -1,10 +1,9 @@
 import datetime
-
-from bude_hezky.request import request_maker
+import requests
 
 API_URL = 'http://api.openweathermap.org'
-API_KEY_KEY = 'appid'
-DAY_START_AT_HOUR = 9
+API_OPTION_KEY = 'appid'
+DAY_START_AT_HOUR = 7
 DAY_ENDS_AT_HOUR = 18
 
 def get_sunny_like_hours(all_forecasts): 
@@ -28,11 +27,11 @@ def get_sunny_like_hours(all_forecasts):
 
     return sunny_like_hours 
 
-
-def get_forecasts_for_city(api_key, city_name, response_content=None):
-    response_content = response_content or request_maker.make_request(
+def get_forecasts_for_city(api_key, city_name):
+    response = requests.get(
         f'{API_URL}/data/2.5/forecast/?q={city_name}&mode=json', 
-        {API_KEY_KEY: api_key}
+        params={API_OPTION_KEY: api_key}
     )
+    response.raise_for_status()
 
-    return response_content.get('list')
+    return response.json().get('list')

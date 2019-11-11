@@ -12,7 +12,6 @@ from bude_hezky.weather import weather_forecast
 
 CITY_OPTION_KEY = 'mesto'
 EMAIL_OPTION_KEY = 'email'
-SUNNY_LIKE_CODES = [1, 2, 3, 4, 5, 6, 20, 21, 30]
 
 parser = argparse.ArgumentParser()
 parser.add_argument(CITY_OPTION_KEY, help='Město, kde bydlíš a kód státu (např. Prague,CZ). Můžeš zkusit i vesnici.')
