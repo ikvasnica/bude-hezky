@@ -21,7 +21,7 @@ def get_sunny_like_hours(all_forecasts):
             continue
         elif datetime_of_forecast.date() == tomorrow_date:
             tomorrow_reached = True
-            if weather_id >= 800 and weather_id <= 899:
+            if weather_id in [800, 801, 802]:
                 sunny_like_hours.append(hour_of_forecast)
         elif tomorrow_reached:
             break
