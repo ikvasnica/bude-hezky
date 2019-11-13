@@ -6,7 +6,7 @@ Tento nástroj v příkazové řádce je určen přímo pro Tebe. Nejen, že zob
 Speciálně věnováno pro [Honza Javorek](https://github.com/honzajavorek).
 
 ## Použití
-Pokud chceš dostávat pravidelné informace o hezkém počasí v Praze, [přidej se do skupiny na Telegramu](https://t.me/joinchat/NmvNMBPC69rjU6TVSfoUkw)! Informaci odesílá bot každý den v 19:00 a to pouze v případě, že bude následující den hezky.
+Pokud chceš dostávat pravidelné informace o hezkém počasí v Praze, [přidej se do skupiny na Telegramu](https://t.me/budeVPrazeHezky)! Informaci odesílá bot každý den v 19:00 a to pouze v případě, že bude následující den hezky.
 
 ## Vývoj
 ### Prerekvizity:
