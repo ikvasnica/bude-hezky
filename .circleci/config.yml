@@ -24,7 +24,7 @@ jobs:
             - "/usr/local/lib/python3.8/site-packages"
       - run:
           command: |
-            pipenv run python -m bude_hezky.main $BUDEHEZKY_CITY_COUNTRY --email $BUDEHEZKY_EMAIL_RECIPIENT
+            pipenv run python -m bude_hezky.main $BUDEHEZKY_CITY_COUNTRY --chat=$BUDEHEZKY_CHAT_ID
 
 workflows:
   version: 2
