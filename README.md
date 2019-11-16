@@ -25,5 +25,5 @@ V terminálu prostě spustíš: `pipenv install`
     `pipenv run python -m bude_hezky.main Prague,CZ`
 
 ### Seznam volitelných argumentů
-+ *--email*: E-mailová adresa, na kterou se odešle informace o hezkém počasí
-+ *--chat*: Telegram chat ID, na kterou se odešle informace o hezkém počasí. [API dokumentace ke zjištění Telegram Chat ID](https://core.telegram.org/bots/api#getupdates)
++ `--email`: E-mailová adresa, na kterou se odešle informace o hezkém počasí
++ `--chat`: Telegram chat ID, na kterou se odešle informace o hezkém počasí. [API dokumentace ke zjištění Telegram Chat ID](https://core.telegram.org/bots/api#getupdates)
