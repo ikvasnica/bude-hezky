@@ -36,7 +36,7 @@ if not sunny_hours:
     sys.exit()
 
 hours_string = ', '.join(str(s) for s in content_builder.build_sunny_ranges(sunny_hours))
-final_message = content_builder.rreplace(f'Hurá! Zítra bude ve městě {city} hezky mezi {hours_string}. Běž třeba na kolo!', ', ', ' a ', 1)
+final_message = content_builder.rreplace(f'Hurá! Zítra bude ve městě {city} hezky mezi {hours_string}. Běž ven s kočárkem!', ', ', ' a ', 1)
 print(final_message)
 
 is_error = False
